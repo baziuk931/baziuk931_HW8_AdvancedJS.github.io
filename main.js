@@ -30,7 +30,8 @@ class Student {
     getAverageMark() {
         let sum = this.marks.reduce((a, b) => a + b, 0);
         let average = sum / this.marks.length;
-        console.log(average.toFixed(1));
+        return average.toFixed(1);
+
     }
 
     dismiss() {
@@ -55,7 +56,7 @@ student.newMark = 5;
 console.log(student.marks);
 
 // create method this.getAverageMark()
-student.getAverageMark();
+console.log(student.getAverageMark());
 
 // dismiss student method
 const student2 = new Student("Львівської фінансової академії м. Львів", "3го курсу", "Анастасія Вікторівна Волчук", 5, 5, 4, 5);
@@ -67,3 +68,25 @@ console.log(student2.marks);
 student2.recover();
 console.log(student2);
 console.log(student2.marks);
+
+// Advanced task
+
+class BudgetStudent extends Student {
+    constructor(university, course, fullName, ...marks) {
+        super(university, course, fullName, ...marks);
+        this.getScholarship = setInterval(() => this.hasScholarship(), 30000)
+    }
+
+    hasScholarship() {
+        if (this.isActive) {
+            if (this.getAverageMark() > 4.0) {
+                console.log("Ви отримали 1400 грн. стипендії");
+            } else {
+                console.log("Середній бал надто низький для отримання степендії");
+            }
+        }
+    }
+}
+
+const budgetStudent = new BudgetStudent("Львівської академії мистецтв м. Львів", "2го курсу", "Олена Вікторівна Тимків", 5, 5, 4);
+console.log(budgetStudent);
